@@ -1,0 +1,9 @@
+redis_ambassador:
+    image: svendowideit/ambassador
+    container_name: redis-ambassador
+    environment:
+        - REDIS_PORT_6379_TCP=tcp://rohan-redis.cloudapp.net
+    links:
+        - redis
+    ports:
+        - "6379:6379"
