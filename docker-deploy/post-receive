@@ -1,0 +1,12 @@
+#!/bin/bash
+
+GIT_WORK_TREE=$DEPLOY_WS_HOME/green-www/ git checkout -f
+docker build -t nodejs_app $DEPLOY_WS_HOME/green-www/
+docker tag -f nodejs_app localhost:5000/nodejs_app:latest
+docker push localhost:5000/nodejs_app:latest
+docker pull localhost:5000/nodejs_app:latest
+docker stop devops_app
+docker rm devops_app
+docker rmi localhost:5000/nodejs_app:current
+docker tag localhost:5000/nodejs_app:latest localhost:5000/nodejs_app:current
+docker run -p 8080:8080 -d --name devops_app localhost:5000/nodejs_app:current

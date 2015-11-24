@@ -1,0 +1,9 @@
+FROM node-base
+
+# Bundle app source
+COPY . /src
+# Install app dependencies
+RUN cd /src; npm install
+
+EXPOSE  8080
+CMD ["node", "/src/main.js", "8080"]

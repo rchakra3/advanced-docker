@@ -1,3 +1,3 @@
 #!/bin/bash
 
-socat TCP:$1 $2
+socat TCP:$1:9001 $2
